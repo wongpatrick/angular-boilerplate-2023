@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { forbiddenNameValidator } from '../shared/forbidden-name.directive';
 
 
 @Component({
@@ -7,12 +8,34 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class FormComponent {
-  myForm = this.formBuilder.group({
-      name: ['', Validators.required]
-    });
+export class FormComponent implements OnInit{
+  myForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  ngOnInit(): void {
+    this.myForm = new FormGroup({
+      name: new FormControl('', [
+        Validators.required, 
+        Validators.minLength(3),
+        forbiddenNameValidator(/Patrick/i)
+      ]),
+      altName: new FormControl("", [this.testValidation()])
+    });
+  }
+
+  testValidation(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if(!control.parent) {
+        return null
+      }
+      const forbidden = control.value == this.myForm.get('name')!.value;
+      return forbidden ? { forbidden: { message: "Custom message" } } : null;
+    };
+  }
+
+  // constructor(private formBuilder: FormBuilder) {}
+  get name() { return this.myForm.get('name'); }
+  get altName() { return this.myForm.get('altName'); }
+
 
   submitForm() {
     if (this.myForm.valid) {

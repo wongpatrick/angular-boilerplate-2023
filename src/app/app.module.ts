@@ -11,6 +11,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { TableComponent } from './table/table.component';
+import { ForbiddenValidatorDirective } from './shared/forbidden-name.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TableComponent } from './table/table.component';
     FormComponent,
     HomeComponent,
     NavBarComponent,
-    TableComponent
+    TableComponent,
+    ForbiddenValidatorDirective,
   ],
   imports: [
     BrowserModule,
