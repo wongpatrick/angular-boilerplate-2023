@@ -28,7 +28,7 @@ export class FormComponent implements OnInit{
         return null
       }
       const forbidden = control.value == this.myForm.get('name')!.value;
-      return forbidden ? { forbidden: { message: "Custom message" } } : null;
+      return forbidden ? { forbidden: { message: "Name and AltName Cannot be the same " } } : null;
     };
   }
 
