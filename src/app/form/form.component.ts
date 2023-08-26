@@ -27,6 +27,9 @@ export class FormComponent implements OnInit{
       if(!control.parent) {
         return null
       }
+      if(control.value == "") {
+        return null
+      }
       const forbidden = control.value == this.myForm.get('name')!.value;
       return forbidden ? { forbidden: { message: "Name and AltName Cannot be the same " } } : null;
     };
