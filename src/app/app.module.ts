@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 import { TableComponent } from './table/table.component';
 import { ForbiddenValidatorDirective } from './shared/forbidden-name.directive';
 
@@ -29,7 +30,8 @@ import { ForbiddenValidatorDirective } from './shared/forbidden-name.directive';
     ReactiveFormsModule,
     FormsModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
